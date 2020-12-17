@@ -68,8 +68,10 @@ def home():
                 # similar_images.clear()
                 # similarity.clear()
                 global similarity
+                global similar_images
                 similar_images = list()
                 similarity = dict()
+                similar_images.clear()
                 for img_hash in list_of_available_image_hashes:
                     # print("uploaded_image_hash: " + str(uploaded_image_hash))
                     similarity[
@@ -78,10 +80,10 @@ def home():
 
                     print(similarity["index"])
 
-                    if similarity["index"] < 5:
+                    if similarity["index"] < 10:
                         similarity["image_name"] = img_hash["image_name"]
+                        similar_images.append(similarity.copy())
 
-                    similar_images.append(similarity.copy())
                     similarity.clear()
 
                     print("these are the images to display" +
@@ -89,8 +91,6 @@ def home():
 
                 return render_template('search_results.html',
                                        images=similar_images)
-
-                similar_images.clear()
 
                 #redirect(url_for('upload_file', filename=filename))
                 #return render_template('uploaded_image.html')
@@ -135,8 +135,10 @@ def search_results():
                 # similar_images.clear()
                 # similarity.clear()
                 global similarity
+                global similar_images
                 similar_images = list()
                 similarity = dict()
+                similar_images.clear()
                 for img_hash in list_of_available_image_hashes:
                     # print("uploaded_image_hash: " + str(uploaded_image_hash))
                     similarity[
@@ -145,7 +147,7 @@ def search_results():
 
                     print(similarity["index"])
 
-                    if similarity["index"] < 5:
+                    if similarity["index"] < 10:
                         similarity["image_name"] = img_hash["image_name"]
                         similar_images.append(similarity.copy())
 
@@ -156,8 +158,6 @@ def search_results():
 
                 return render_template('search_results.html',
                                        images=similar_images)
-
-                similar_images.clear()
 
     images = list()
     print(images)
